@@ -11,11 +11,9 @@ int main()
 
 	CString sPortName;
 	sPortName.Format(_T("COM%d"), cNum);
-	//LPCTSTR sPortName = L"COM1";
 
 	hSerial = ::CreateFile(sPortName, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	//hSerial = ::CreateFile(sPortName, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, 0);
-
+	
 	if (hSerial == INVALID_HANDLE_VALUE)
 	{
 		if (GetLastError() == ERROR_FILE_NOT_FOUND)
@@ -35,7 +33,6 @@ int main()
 	dcbSerialParams.ByteSize = 8;
 	dcbSerialParams.StopBits = ONESTOPBIT;
 	dcbSerialParams.Parity = NOPARITY;
-	//dcbSerialParams.EvtChar = '\n';
 
 	if (!SetCommState(hSerial, &dcbSerialParams))
 	{
